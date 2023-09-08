@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app='ShoppingList'>
+<html ng-app='RestaurantMenu'>
 
 <head>
   <meta charset="utf-8">
@@ -8,31 +8,19 @@
 </head>
 
 <body>
-  <h1>Welcome to Premade No Cookie Shopping List</h1>
+  <h2>Restaurant menu REST API to create a master/detail view pair</h1>
 
   <ui-view></ui-view>
-
   <loading-spinner></loading-spinner>
-
-  <!-- Libraries -->
   <script src="lib/angular.min.js"></script>
   <script src="lib/angular-ui-router.min.js"></script>
-
-  <!-- Modules -->
-  <script src="src/shoppinglist/shoppinglist.module.js"></script>
+  <script src="src/restaurantMenu/restaurantMenu.module.js"></script>
   <script src="src/spinner/spinner.module.js"></script>
-
-  <!-- Routes -->
   <script src="src/routes.js"></script>
-
-  <!-- 'ShoppingList' module artifacts -->
-  <script src="src/shoppinglist/shoppinglist.component.js"></script>
-  <script src="src/shoppinglist/itemdetail.component.js"></script>
-  <script src="src/shoppinglist/main-shoppinglist.controller.js"></script>
-  <script src="src/shoppinglist/shoppinglist.service.js"></script>
-  <script src="src/shoppinglist/item-detail.controller.js"></script>
-
-  <!-- 'Spinner' module artifacts -->
+  <script src="src/restaurantMenu/restaurantMenu.component.js"></script>
+  <script src="src/restaurantMenu/itemdetail.component.js"></script>
+  <script src="src/restaurantMenu/main-restaurantMenu.controller.js"></script>
+  <script src="src/restaurantMenu/restaurantMenu.service.js"></script>
   <script src="src/spinner/loadingspinner.component.js"></script>
 
 </body>

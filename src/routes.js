@@ -1,103 +1,51 @@
 (function () {
   'use strict';
 
-  angular.module('ShoppingList')
+  angular.module('RestaurantMenu')
     .config(RoutesConfig);
 
   RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
   function RoutesConfig($stateProvider, $urlRouterProvider) {
 
-    // Redirect to home page if no other URL matches
     $urlRouterProvider.otherwise('/');
 
-    // *** Set up UI states ***
     $stateProvider
 
-      // Home page
       .state('home', {
         url: '/',
-        template: '<a ui-sref="mainList">See our Premade No Cookie Shopping List!</a>',
-        //templateUrl: 'src/shoppinglist/templates/home.template.html'
+        template: '<a ui-sref="categories">Welcome to our Restaurant</a>',
       })
 
-      // Premade list page
-      .state('mainList', {
-        url: '/main-list',
-        template: '<a ui-sref="home">Home</a> &lt; <span>List</span>\
-                   <h3>Premade List with Absolutely No Cookies in it</h3>\
-                   <shopping-list items="mainList.items"></shopping-list>\
+      .state('categories', {
+        url: '/categories',
+        template: '<a ui-sref="home">Home</a>\
+                   <h3>All categories</h3>\
+                   <restaurant-menu items="mainList.items"></shopping-list>\
                    <ui-view></ui-view>',
-        //templateUrl: 'src/shoppinglist/templates/main-shoppinglist.template.html',
-        controller: 'MainShoppingListController as mainList',
+        controller: 'MainRestaurantMenuController as mainList',
         resolve: {
-          items: ['ShoppingListService', function (ShoppingListService) {
-            return ShoppingListService.getMenuCategories();
+          items: ['RestaurantMenuService', function (RestaurantMenuService) {
+            return RestaurantMenuService.getMenuCategories();
           }]
         }
       })
 
-      .state('itemDetail', {
-        url: '/item-detail/{categoryShortName}',
+      .state('items', {
+        url: '/items/{categoryShortName}',
         params: {
           categoryShortName: 'A'
         },
-        template: '<a ui-sref="home">Home</a> &lt; <span>List</span>\
-                   <h3>Premade List with Absolutely No Cookies in it</h3>\
+        template: '<a ui-sref="home">Home</a>\
+                   <h3>All items under this category</h3>\
                    <item-detail items="mainList.items"></shopping-list>',
-        //templateUrl: 'src/shoppinglist/templates/main-shoppinglist.template.html',
-        controller: 'MainShoppingListController as mainList',
+        controller: 'MainRestaurantMenuController as mainList',
         resolve: {
 
-          items: ['$stateParams', 'ShoppingListService', function ($stateParams, ShoppingListService) {
-            console.log("here: "+$stateParams.categoryShortName)
-            return ShoppingListService.getMenuItems($stateParams.categoryShortName);
+          items: ['$stateParams', 'RestaurantMenuService', function ($stateParams, RestaurantMenuService) {
+            return RestaurantMenuService.getMenuItems($stateParams.categoryShortName);
           }]
         }
       })
-
-      /*
-      .state('itemDetail', {
-        url: '/item-detail/{itemId}',
-        template: '<a ui-sref="home">Home</a> &lt;\
-        <a ui-sref="mainList">List</a> &lt;\
-        id: {{ itemDetail.id }}<br>\
-        name: {{ itemDetail.name }}<br>\
-        short_name: {{itemDetail.short_name}}<br>\
-        special_instructions: {{itemDetail.special_instructions}}',
-        //templateUrl: 'src/shoppinglist/templates/item-detail.template.html',
-        controller: 'ItemDetailController as itemDetail',
-        resolve: {
-          item: ['$stateParams', 'ShoppingListService',
-            function ($stateParams, ShoppingListService) {
-              return ShoppingListService.getMenuItems($stateParams.itemId)
-                .then(function (items) {
-                  //return items[$stateParams.itemId];
-                });
-            }]
-        }
-      });
-      */
-
-    /*
-    .state('itemDetail', {
-      url: '/item-detail/{categoryShortName}',
-      template: '<a ui-sref="home">Home</a> &lt; <span>List</span>\
-      <h3>Premade List with Absolutely No Cookies in it</h3>\
-      <item-detail items="itemDetail.items"></shopping-list>\
-      <ui-view></ui-view>',
-      controller: 'ItemDetailController as itemDetail',
-      resolve: {
-        item: ['$stateParams', 'ShoppingListService',
-          function ($stateParams, ShoppingListService) {
-            return ShoppingListService.getMenuItems($stateParams.categoryShortName)
-              .then(function (items) {
-                return items;
-                //return items[$stateParams.categoryShortName];
-              });
-          }]
-      }
-    });
-    */
 
   };
 

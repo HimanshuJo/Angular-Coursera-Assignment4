@@ -4,7 +4,6 @@
   angular.module('Spinner')
     .component('loadingSpinner', {
       template: '<img ng-if="$ctrl.showSpinner" class="loading-icon" src="images/flickr-loading.gif" alt="loading">',
-      //templateUrl: 'src/spinner/loadingspinner.template.html',
       controller: SpinnerController
     });
 
