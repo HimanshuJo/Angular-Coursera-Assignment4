@@ -48,9 +48,8 @@
 
       var deferred = $q.defer();
       $timeout(function () {
-        // deferred.reject(items);
         deferred.resolve(items);
-      }, 800);
+      }, 1);
 
       return deferred.promise;
     };
@@ -59,6 +58,39 @@
       if (itemsarr.length != 0) {
         itemsarr.splice(0, itemsarr.length);
       }
+      if (itemstmpmp.size === 0) {
+        $http({
+          method: 'GET',
+          url: (ApiBasePath + "")
+        }).then(function successCallback(response) {
+          const entries = Object.entries(response.data);
+          console.log("categories data: ", response);
+          for (let [key, value] of entries) {
+            const entries2 = Object.entries(value);
+            let id_value = "", name_value = "", short_name_value = "", special_instructions_value = "";
+            for (let [key2, value2] of entries2) {
+              if (key2.toString() === "id") {
+                id_value = value2.toString();
+              } else if (key2.toString() === "name") {
+                name_value = value2.toString();
+              } else if (key2.toString() === "short_name") {
+                short_name_value = value2.toString();
+              } else {
+                special_instructions_value = value2.toString();
+              }
+            }
+            items.push({
+              id: id_value,
+              name: name_value,
+              short_name: short_name_value,
+              special_instructions: special_instructions_value
+            });
+            itemstmpmp.set(short_name_value, id_value);
+          }
+        }, function errorCallback(response) {
+        });
+      }
+
       $http({
         method: 'GET',
         url: (ApiBasePath2 + "")
@@ -129,9 +161,8 @@
       var deferred = $q.defer();
 
       $timeout(function () {
-        // deferred.reject(items);
         deferred.resolve(itemsarr);
-      }, 800);
+      }, 1);
 
       return deferred.promise;
     };
