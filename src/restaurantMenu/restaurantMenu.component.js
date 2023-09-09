@@ -3,15 +3,26 @@
 
   angular.module('RestaurantMenu')
     .component('restaurantMenu', {
-      template: '<ul>\
-      <li ng-repeat="item in $ctrl.items" ui-sref="items({categoryShortName: {{ item.id }}})">\
-      <strong>id:</strong> {{ item.id }}<br>\
-      <strong>name:</strong> {{ item.name }}<br>\
-      <strong>short_name: </strong> {{item.short_name}}<br>\
-      <strong>special_instructions: </strong> {{item.special_instructions}}\
-      <hr>\
-      </li>\
-      </ul>',
+      template: '<table>\
+      <thead>\
+        <tr>\
+          <th>ID</th>\
+          <th>Name</th>\
+          <th>Short Name</th>\
+          <th>Special Instructions</th>\
+          <th>Navigation</th>\
+        </tr>\
+      </thead>\
+      <tbody>\
+        <tr ng-repeat="item in $ctrl.items">\
+          <td>{{ item.id }}</td>\
+          <td>{{ item.name }}</td>\
+          <td>{{ item.short_name }}</td>\
+          <td>{{ item.special_instructions }}</td>\
+          <td><a ng-href="#/items/{{ item.id }}" ui-sref="items({ categoryShortName: item.id })">Details</a></td>\
+        </tr>\
+      </tbody>\
+    </table>',
       bindings: {
         items: '<'
       }

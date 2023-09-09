@@ -3,18 +3,30 @@
   
     angular.module('RestaurantMenu')
       .component('itemDetail', {
-        template: '<ul>\
-        <li ng-repeat="item in $ctrl.items">\
-        <strong>Description: </strong> {{ item.description }}<br>\
-        <strong>Large Portion Name: </strong> {{ item.large_portion_name }}<br>\
-        <strong>Name: </strong> {{item.name}}<br>\
-        <strong>Price Large: </strong> {{item.price_large}}<br>\
-        <strong>Price Small: </strong> {{item.price_small}}<br>\
-        <strong>Short name: </strong> {{item.short_name}}<br>\
-        <strong>Small Portion Name: </strong> {{item.small_portion_name}}<br>\
-        <hr>\
-        </li>\
-        </ul>',
+        template: '<table>\
+        <thead>\
+          <tr>\
+            <th>Description</th>\
+            <th>Large Portion Name</th>\
+            <th>Name</th>\
+            <th>Price Large</th>\
+            <th>Price Small</th>\
+            <th>Short Name</th>\
+            <th>Small Portion Name</th>\
+          </tr>\
+        </thead>\
+        <tbody>\
+          <tr ng-repeat="item in $ctrl.items">\
+            <td>{{ item.description }}</td>\
+            <td>{{ item.large_portion_name }}</td>\
+            <td>{{ item.name }}</td>\
+            <td>{{ item.price_large }}</td>\
+            <td>{{ item.price_small }}</td>\
+            <td>{{ item.short_name }}</td>\
+            <td>{{ item.small_portion_name }}</td>\
+          </tr>\
+        </tbody>\
+      </table>',
         bindings: {
           items: '<'
         }
