@@ -13,7 +13,7 @@
 
       .state('home', {
         url: '/',
-        template: '<a ui-sref="categories">Welcome to our Restaurant</a>',
+        template: '<a ui-sref="categories"><h3 style="text-align: center;">Welcome to our Restaurant</h3></a>',
       })
 
       .state('categories', {
